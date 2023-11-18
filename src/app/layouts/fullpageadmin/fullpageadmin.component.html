@@ -1,0 +1,16 @@
+<header fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex>Logo</div>
+    <div>
+        <button routerLink="">Link</button>
+        <button routerLink="">Link</button>
+        <button routerLink="">Link</button>
+    </div>
+</header>
+<div fxLaout="row" fxFlex>
+    <div fxFlex="20">
+        <div fxFlex class="sidebar">SideBar</div>
+    </div>
+    <div fxFlex="80" class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
