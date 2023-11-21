@@ -5,7 +5,7 @@ import { HomeComponent } from 'src/app/modules/home/home.component';
 import { ProductComponent } from 'src/app/modules/product/product.component';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [DefaultComponent, HomeComponent, ProductComponent],
