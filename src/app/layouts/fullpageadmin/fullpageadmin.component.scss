@@ -6,14 +6,23 @@
 
 .content {
     padding: 20px;
+    background-color: #ddd
 }
 
 header {
-    background-color: #ddd;
+    background-color: #292b31;
     padding: 20px;
 }
 
 .sidebar {
-    background-color: #bbb;
+    background-color: #292b31;
     padding: 20px;
+    a{
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+mat-list-option {
+    color: white;
 }

@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from './product.service';
 import { Product } from './model/product';
 import { Subject, takeUntil } from 'rxjs';
+import { Page } from 'src/app/shared/model/page';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-product',
@@ -11,7 +13,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class ProductComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject();
 
-  products: Product[] = [];
+  page: Page<Product> | undefined = undefined;
 
   constructor(private productService: ProductService) {}
 
@@ -20,16 +22,24 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   getProducts(): void {
-    this.productService
-      .getProducts()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((props: Product[]) => {
-        this.products = props;
-      });
+    this.getProductPage(0, 10);
+  }
+
+  onPageEvent(event: PageEvent) {
+    this.getProductPage(event.pageIndex, event.pageSize);
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private getProductPage(page: number, size: number) {
+    this.productService
+      .getProducts(page, size)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((page: Page<Product>) => {
+        this.page = page;
+      });
   }
 }

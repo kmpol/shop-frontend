@@ -1,5 +1,5 @@
 <header fxLayout="row" fxLayoutAlign="start center">
-    <div fxFlex>Logo</div>
+    <div fxFlex>Shop Panel</div>
     <div>
         <button routerLink="">Link</button>
         <button routerLink="">Link</button>
@@ -7,8 +7,12 @@
     </div>
 </header>
 <div fxLaout="row" fxFlex>
-    <div fxFlex="20">
-        <div fxFlex class="sidebar">SideBar</div>
+    <div fxFlex class="sidebar">
+        <mat-selection-list [multiple]="false">
+            <mat-list-option><a routerLink="/admin">Dashboard</a></mat-list-option>
+            <mat-list-option><a routerLink="/admin">Products</a></mat-list-option>
+            <mat-list-option><a routerLink="/admin">Orders</a></mat-list-option>
+        </mat-selection-list>
     </div>
     <div fxFlex="80" class="content">
         <router-outlet></router-outlet>
