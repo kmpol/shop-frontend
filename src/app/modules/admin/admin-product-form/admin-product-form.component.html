@@ -1,0 +1,31 @@
+<div [formGroup]="parentForm" fxLayout="column">
+    <mat-form-field appearance="fill">
+        <mat-label>Product name</mat-label>
+        <input matInput placeholder="Provide product's name" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput rows="20" placeholder="Provide product's description"
+            formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <input matInput placeholder="Provide product's category" formControlName="category">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput placeholder="Provide product's price" formControlName="price">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Currency</mat-label>
+        <input matInput placeholder="Provide product's currency" formControlName="currency">
+    </mat-form-field>
+
+    <div fxLayoutAlign="end">
+        <button mat-flat-button color="primary">Save</button>
+    </div>
+</div>
