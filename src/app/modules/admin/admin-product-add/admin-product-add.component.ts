@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminProductAddService } from './admin-product-add.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminMessageService } from '../admin-message.service';
 
 @Component({
   selector: 'app-admin-product-add',
@@ -16,16 +17,17 @@ export class AdminProductAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private adminProductAddService: AdminProductAddService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private adminMessageService: AdminMessageService
   ) {}
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
-      name: [''],
-      description: [''],
-      category: [''],
-      price: [''],
-      currency: ['PLN'],
+      name: ['', [Validators.required, Validators.minLength(4)]],
+      description: ['', [Validators.required, Validators.minLength(4)]],
+      category: ['', [Validators.required, Validators.minLength(4)]],
+      price: ['', [Validators.required, Validators.min(0)]],
+      currency: ['PLN', Validators.required],
     });
   }
 
@@ -39,6 +41,9 @@ export class AdminProductAddComponent implements OnInit {
               duration: 3000,
             });
           });
+      },
+      error: (err) => {
+        this.adminMessageService.addSpringErrors(err);
       },
     });
   }

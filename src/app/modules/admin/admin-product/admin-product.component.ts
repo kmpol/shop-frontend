@@ -1,6 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AdminProductService } from './admin-product.service';
-import { Observable, Subject, map, startWith, switchMap } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  map,
+  startWith,
+  switchMap,
+  takeUntil,
+} from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { AdminProduct } from './model/adminProduct';
 
@@ -29,7 +36,8 @@ export class AdminProductComponent implements AfterViewInit {
             this.paginator.pageIndex,
             this.paginator.pageSize
           );
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe((data) => {
         this.totalElements = data.totalElements;
