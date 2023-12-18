@@ -10,6 +10,8 @@ import {
 } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { AdminProduct } from './model/adminProduct';
+import { AdminConfirmDialogService } from '../admin-confirm-dialog.service';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-admin-product',
@@ -20,12 +22,16 @@ export class AdminProductComponent implements AfterViewInit {
   private destroy$: Subject<void> = new Subject();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatTable) table!: MatTable<any>;
 
   displayedColumns: string[] = ['id', 'name', 'price', 'actions'];
   totalElements: number = 0;
   products: AdminProduct[] = [];
 
-  constructor(private adminProductService: AdminProductService) {}
+  constructor(
+    private adminProductService: AdminProductService,
+    private dialogService: AdminConfirmDialogService
+  ) {}
 
   ngAfterViewInit(): void {
     this.paginator.page
@@ -42,6 +48,24 @@ export class AdminProductComponent implements AfterViewInit {
       .subscribe((data) => {
         this.totalElements = data.totalElements;
         this.products = data.content;
+      });
+  }
+
+  confirmDelete(element: AdminProduct) {
+    this.dialogService
+      .openConfirmDialog('Are you sure you want to delete?')
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.adminProductService.delete(element.id).subscribe(() => {
+            this.products.forEach((product, index) => {
+              if (element == product) {
+                this.products.splice(index, 1);
+                this.table.renderRows();
+              }
+            });
+          });
+        }
       });
   }
 

@@ -18,4 +18,8 @@ export class AdminProductService {
       params: new HttpParams().set('page', page).set('size', size),
     });
   }
+
+  public delete(id: number): Observable<void> {
+    return this.http.delete<void>(`/api/v1/admin/products/${id}`);
+  }
 }
