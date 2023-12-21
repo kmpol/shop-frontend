@@ -14,6 +14,9 @@ import { AdminMessageService } from '../admin-message.service';
 export class AdminProductUpdateComponent implements OnInit {
   product!: AdminProductUpdate;
   productForm!: FormGroup;
+  imageForm!: FormGroup;
+  requiredFileTypes = 'image/jpeg, image/png';
+  image: string | null = null;
 
   constructor(
     private router: ActivatedRoute,
@@ -33,6 +36,10 @@ export class AdminProductUpdateComponent implements OnInit {
       price: ['', [Validators.required, Validators.min(0)]],
       currency: ['PLN', Validators.required],
     });
+
+    this.imageForm = this.formBuilder.group({
+      file: [''],
+    });
   }
 
   getProduct() {
@@ -45,7 +52,14 @@ export class AdminProductUpdateComponent implements OnInit {
   onSubmitForm() {
     let id: number = Number(this.router.snapshot.params['id']);
     this.adminProductUpdateService
-      .saveProduct(id, this.productForm.value as AdminProductUpdate)
+      .saveProduct(id, {
+        name: this.productForm.get('name')?.value,
+        description: this.productForm.get('description')?.value,
+        category: this.productForm.get('category')?.value,
+        price: this.productForm.get('price')?.value,
+        currency: this.productForm.get('currency')?.value,
+        image: this.image,
+      } as AdminProductUpdate)
       .subscribe({
         next: (product) => {
           this.setFormFields(product);
@@ -61,6 +75,23 @@ export class AdminProductUpdateComponent implements OnInit {
       });
   }
 
+  onUploadFile() {
+    let formData = new FormData();
+    formData.append('file', this.imageForm.get('file')?.value);
+    this.adminProductUpdateService
+      .uploadImage(formData)
+      .subscribe((result) => (this.image = result?.filename));
+  }
+
+  onFileChange(event: any): void {
+    if (event.target.files.length === 0) {
+      return;
+    }
+    this.imageForm.patchValue({
+      file: event.target.files[0],
+    });
+  }
+
   private setFormFields(product: AdminProductUpdate): void {
     this.productForm.setValue({
       name: product.name,
@@ -69,5 +100,6 @@ export class AdminProductUpdateComponent implements OnInit {
       price: product.price,
       currency: product.currency,
     });
+    this.image = product.image;
   }
 }

@@ -5,4 +5,5 @@ export interface AdminProductUpdate {
   category: string;
   price: number;
   currency: string;
+  image: string;
 }
