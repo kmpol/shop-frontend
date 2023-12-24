@@ -29,4 +29,8 @@ export class AdminProductFormComponent implements OnInit {
   get currency() {
     return this.parentForm.get('currency');
   }
+
+  get slug() {
+    return this.parentForm.get('slug');
+  }
 }
