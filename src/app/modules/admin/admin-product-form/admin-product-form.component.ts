@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { AdminCategoryNameDto } from './adminCategoryNameDto';
+import { FormCategoryService } from './form-category.service';
 
 @Component({
   selector: 'app-admin-product-form',
@@ -7,8 +9,19 @@ import { FormGroup } from '@angular/forms';
 })
 export class AdminProductFormComponent implements OnInit {
   @Input() parentForm!: FormGroup;
+  categories: Array<AdminCategoryNameDto> = [];
 
-  ngOnInit(): void {}
+  constructor(private formCategoryService: FormCategoryService) {}
+
+  ngOnInit(): void {
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.formCategoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
 
   get name() {
     return this.parentForm.get('name');
@@ -18,12 +31,16 @@ export class AdminProductFormComponent implements OnInit {
     return this.parentForm.get('description');
   }
 
+  get fullDescription() {
+    return this.parentForm.get('fullDescription');
+  }
+
   get price() {
     return this.parentForm.get('price');
   }
 
-  get category() {
-    return this.parentForm.get('category');
+  get categoryId() {
+    return this.parentForm.get('categoryId');
   }
 
   get currency() {

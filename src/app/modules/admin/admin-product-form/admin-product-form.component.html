@@ -40,14 +40,27 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-        <mat-label>Category</mat-label>
-        <input matInput placeholder="Provide product's category" formControlName="category">
-        <div *ngIf="category?.invalid && (category?.dirty || category?.touched)">
-            <div *ngIf="category?.errors?.['required']">
-                Product category is required
+        <mat-label>Full Description</mat-label>
+        <textarea matInput rows="20" placeholder="Provide product's full description"
+            formControlName="fullDescription"></textarea>
+        <div *ngIf="fullDescription?.invalid && (fullDescription?.dirty || fullDescription?.touched)">
+            <div *ngIf="fullDescription?.errors?.['required']">
+                Product fullDescription is required
             </div>
-            <div *ngIf="category?.errors?.['minlength']">
-                Product category must be at least 4 characters long
+            <div *ngIf="fullDescription?.errors?.['minlength']">
+                Product description must be at least 4 characters long
+            </div>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId">
+            <mat-option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</mat-option>
+        </mat-select>
+        <div *ngIf="categoryId?.invalid && (categoryId?.dirty || categoryId?.touched)">
+            <div *ngIf="categoryId?.errors?.['required']">
+                Product categoryId is required
             </div>
         </div>
     </mat-form-field>
