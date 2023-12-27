@@ -1,0 +1,10 @@
+@import '../../../variables.scss';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    width: 75vw;
+    margin: 0 auto;
+    height: 100%;
+}
+

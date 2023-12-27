@@ -1,0 +1,22 @@
+<header fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex>Shop Panel</div>
+    <div>
+        <button routerLink="">Link</button>
+        <button routerLink="">Link</button>
+        <button routerLink="">Link</button>
+    </div>
+</header>
+<div fxLaout="row" fxFlex>
+    <div fxFlex class="sidebar">
+        <mat-selection-list [multiple]="false">
+            <mat-list-option><a routerLink="/admin">Dashboard</a></mat-list-option>
+            <mat-list-option><a routerLink="/admin/products">Products</a></mat-list-option>
+            <mat-list-option><a routerLink="/admin/categories">Categories</a></mat-list-option>
+            <mat-list-option><a routerLink="/admin">Orders</a></mat-list-option>
+        </mat-selection-list>
+    </div>
+    <div fxFlex="80" class="content">
+        <app-admin-message></app-admin-message>
+        <router-outlet></router-outlet>
+    </div>
+</div>
