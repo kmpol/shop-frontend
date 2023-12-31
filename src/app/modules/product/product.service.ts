@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Product } from './model/product';
+import { Product } from '../common/model/product';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Page } from 'src/app/shared/model/page';
+import { Page } from 'src/app/modules/common/model/page';
 
 @Injectable({
   providedIn: 'root',

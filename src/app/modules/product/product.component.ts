@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from './product.service';
-import { Product } from './model/product';
+import { Product } from '../common/model/product';
 import { Subject, takeUntil } from 'rxjs';
-import { Page } from 'src/app/shared/model/page';
+import { Page } from 'src/app/modules/common/model/page';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({

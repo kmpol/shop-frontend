@@ -2,19 +2,19 @@
     <div fxLayout="row" fxFlex fxLayoutGap="20">
         <div>
             <img *ngIf="!product?.image" src="/assets/image-placeholder.png" width="350">
-            <img *ngIf="product?.image" src="{{'/api/v1/admin/products/files/' + product?.image}}" width="350">
+            <img *ngIf="product?.image" src="{{'/api/v1/admin/products/files/' + product.image}}" width="350">
         </div>
         <div fxLayout="column" fxFlex>
-            <h1>{{product?.name}}</h1>
-            <small>{{product?.category}}</small>
+            <h1>{{product.name}}</h1>
+            <small>{{product.category}}</small>
             <div class="description">
-                {{product?.description}}
+                {{product.description}}
             </div>
             <div class="description">
-                {{product?.fullDescription}}
+                {{product.fullDescription}}
             </div>
             <div fxLayout="row" fxFlexAlign="end">
-                <span class="price">{{product?.price}} {{product?.currency}}</span>
+                <span class="price">{{product.price}} {{product.currency}}</span>
             </div>
             <button mat-flat-button color="warn">Do koszyka</button>
         </div>

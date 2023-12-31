@@ -1,6 +1,6 @@
-import { Page } from 'src/app/shared/model/page';
+import { Page } from 'src/app/modules/common/model/page';
 import { Category } from './category';
-import { Product } from '../../product/model/product';
+import { Product } from '../../common/model/product';
 
 export interface CategoryProducts {
   category: Category;

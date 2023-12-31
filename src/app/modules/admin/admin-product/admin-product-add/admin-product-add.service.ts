@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AdminProductUpdate } from '../admin-product-update/model/adminProductUpdate';
+import { AdminProductUpdate } from '../model/adminProductUpdate';
 import { Observable } from 'rxjs';
 
 @Injectable({

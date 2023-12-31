@@ -10,7 +10,7 @@ import {
 } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { AdminProduct } from './model/adminProduct';
-import { AdminConfirmDialogService } from '../admin-confirm-dialog.service';
+import { AdminConfirmDialogService } from '../common/service/admin-confirm-dialog.service';
 import { MatTable } from '@angular/material/table';
 
 @Component({
